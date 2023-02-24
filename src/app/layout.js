@@ -1,14 +1,17 @@
 import './globals.css'
+import { HeaderNav } from './headerNav'
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      {/*
-        <head /> will contain the components returned by the nearest parent
-        head.js. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
-      */}
+    <html lang="en" className='bg-black'>
       <head />
-      <body>{children}</body>
+      <body>
+      <HeaderNav/>
+      <main>{children}</main>
+      <footer>
+        <h2 className='text-white'>Este es un Footer y se encontrara en todas las secciones de la paginas</h2>
+      </footer>
+      </body>
     </html>
   )
 }
