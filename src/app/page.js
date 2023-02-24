@@ -1,13 +1,25 @@
-import Image from 'next/image'
-import { Inter } from '@next/font/google'
-import styles from './page.module.css'
+import { Redis } from "@upstash/redis";
+import styles from "./page.module.css";
 
-const inter = Inter({ subsets: ['latin'] })
+export default async function Home() {
+  const redis = new Redis({
+    url: "https://quiet-gnat-32974.upstash.io",
+    token:
+      "AYDOASQgOWNkYTFlMDQtZjhkMS00NWI3LTk3ZTgtZjY4Yjg1OTEyZDE1YmRkODg0MjkyODMwNGI4MThjNzdmNmRkYTlkMjg5MDY=",
+  });
 
-export default function Home() {
+  const member = await redis.srandmember("nextjs13")
+
+  console.log(member)
+
   return (
-    <main>
-      <h1>Dentro de Page Principal</h1>
-    </main>
-  )
+    <div className={styles.container}>
+      <main className={styles.main}>
+        <h1 className={styles.title}>Welcome {member}</h1>
+        <p className={styles.description}>
+          You have been randomly chosen by the redis algorithm.
+        </p>
+      </main>
+    </div>
+  );
 }
