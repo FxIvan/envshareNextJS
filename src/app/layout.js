@@ -1,17 +1,17 @@
-import './globals.css'
-import { HeaderNav } from './headerNav'
+import "./globals.css";
+//Components
+import { HeaderNav } from "./headerNav";
+import Footer from "./footer";
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className='bg-black'>
+    <html lang="en" className="bg-black">
       <head />
       <body>
-      <HeaderNav/>
-      <main>{children}</main>
-      <footer>
-        <h2 className='text-white'>Este es un Footer y se encontrara en todas las secciones de la paginas</h2>
-      </footer>
+        <HeaderNav />
+        <main>{children}</main>
+        <Footer />
       </body>
     </html>
-  )
+  );
 }
