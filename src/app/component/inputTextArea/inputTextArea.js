@@ -4,18 +4,20 @@ import styles from "./style.module.css";
 
 export default function InputTextArea() {
   const [inputArea, setInputArea] = useState("");
-  const [selectedFile, setSelectedFile] = useState();
+  const [reads, setReads] = useState(100);
+  const [ttl, setTtl] = useState(7);
+  const [selectTime, setSelectTme] = useState(60 * 60 * 24);
   const [error, setError] = useState();
 
   const handleSubmit = () => {};
   const handleUpload = (file) => {
     if (file.size > 1024 * 16) setError("File size is too big");
-    let fileData = new FileReader()
-    fileData.onloadend = (e) =>{
+    let fileData = new FileReader();
+    fileData.onloadend = (e) => {
       const svg = e.target.result;
-      setInputArea(svg)
-    }
-    fileData.readAsText(file)
+      setInputArea(svg);
+    };
+    fileData.readAsText(file);
   };
 
   return (
@@ -56,8 +58,42 @@ export default function InputTextArea() {
             />
             <span>{error}</span>
           </div>
-          <div></div>
-          <div></div>
+          <div>
+            <div>
+              <label>Read</label>
+              <input
+                type="number"
+                value={reads}
+                className="text-black"
+                onChange={(e) => setReads(e.target.value)}
+              />
+            </div>
+          </div>
+          <div>
+            <div>
+              <label>TTL</label>
+              <input
+                type="number"
+                className="text-black"
+                value={ttl}
+                onChange={(e) => setTtl(e.target.value)}
+              />
+            </div>
+            <div>
+              <select
+                id="time"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 text-black"
+                onChange={(e) => setSelectTme(e.target.value)}
+                defaultValue={60 * 60 * 24}
+              >
+                <option value={60}>{ttl === 1 ? "Minute" : "Minutes"}</option>
+                <option value={60 * 60}>{ttl === 1 ? "Hour" : "Hours"}</option>
+                <option value={60 * 60 * 24}>
+                  {ttl === 1 ? "Day" : "Days"}
+                </option>
+              </select>
+            </div>
+          </div>
         </div>
         <div></div>
       </pre>
